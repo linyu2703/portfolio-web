@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 // Re-importing Lucide icons needed for section headers
 import { Menu, X, Mail, Linkedin, Github, FileText, Briefcase, GraduationCap, Code } from 'lucide-react'; 
-import pfp from "../assets/pfp.jpg"
+import pfp from "/src/source/pfp.jpg";
 
 // ===========================================
 // I. DATA DEFINITIONS
