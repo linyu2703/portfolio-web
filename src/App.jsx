@@ -62,6 +62,26 @@ const projectsData = [
       'Generated heat maps, cluster maps, and pairplots to uncover trends and insights into the relationship between stock prices and returns.',
     ],
   },
+  {
+    title: 'Healthcare Trend Analysis',
+    imageUrl: 'https://placehold.co/600x300/3B82F6/FFFFFF?text=Healthcare+Trends+Report', // Blue placeholder
+    tools: ['R', 'Tableau', 'SQL', 'EHR Data'],
+    githubLink: 'https://github.com/linyu2703/healthcare-trends', // Placeholder GitHub link
+    details: [
+      'Utilized R programming to process and clean large datasets from simulated Electronic Health Records (EHR) to identify seasonal trends in patient admissions.',
+      'Constructed predictive models for resource allocation based on historical patient volume, leading to a projected 15% improvement in operational efficiency.',
+    ],
+  },
+  {
+    title: 'Investment Portfolio Optimization',
+    imageUrl: 'https://placehold.co/600x300/F59E0B/FFFFFF?text=Portfolio+Optimization+Chart', // Amber placeholder
+    tools: ['Python', 'SciPy', 'Pandas', 'Monte Carlo'],
+    githubLink: 'https://github.com/linyu2703/portfolio-optimizer', // Placeholder GitHub link
+    details: [
+      'Implemented Markowitz portfolio theory using Python and the SciPy library to calculate the efficient frontier for a basket of 10 stocks.',
+      'Developed a Monte Carlo simulation to forecast potential portfolio returns and risks, aiding in asset diversification strategies.',
+    ],
+  },
 ];
 
 const skillsData = [
@@ -180,7 +200,8 @@ const Header = ({ sections }) => {
     <header className="sticky top-0 bg-white shadow-md z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex justify-between items-center py-4">
-          <a href="#hero" className="text-2xl font-bold text-gray-900 hover:text-gray-600 transition duration-300">
+          {/* Updated link to point to the new #about anchor */}
+          <a href="#about" className="text-2xl font-bold text-gray-900 hover:text-gray-600 transition duration-300">
             Yu Lin
           </a>
           <div className="hidden md:flex space-x-8 text-lg font-medium">
@@ -203,23 +224,28 @@ const Header = ({ sections }) => {
 };
 
 const HeroSection = () => (
-  <section id="hero" className="pt-16 pb-4 md:pt-24 md:pb-6">
+  // Anchor ID is now on the section container, and scroll-mt-20 is added 
+  // to offset the sticky header when navigating to this ID.
+  <section 
+    id="about" 
+    className="pt-16 pb-4 md:pt-24 md:pb-6 scroll-mt-20"
+  >
     <div className="flex flex-col items-center">
       <div className="w-full max-w-3xl mx-auto">
         <div className="flex flex-col items-center md:flex-row md:justify-start gap-6 w-full">
           
-          {/* Profile Image with Dynamic Wavy Border */}
+          {/* Profile Image - Large, Round, and with the requested thin black border */}
           <div 
-            className="flex-shrink-0 w-32 h-32 sm:w-40 sm:h-40 mb-6 md:mb-0 shadow-2xl transition duration-500 hover:scale-[1.05]"
+            // SIZE: w-48 h-48 on mobile, w-64 h-64 on small screens and up
+            className="flex-shrink-0 w-48 h-48 sm:w-64 sm:h-64 mb-6 md:mb-0" 
             id="profile-picture-container"
           >
-            <div className="w-full h-full blob-wrapper">
-              <img 
-                src="https://placehold.co/160x160/4f46e5/ffffff?text=YL" 
-                alt="Yu Lin Profile Photo" 
-                className="blob-image"
-              />
-            </div>
+            <img 
+              src="pfp.jpg" 
+              alt="Yu Lin Profile Photo" 
+              // *** Updated for thin black border ***
+              className="w-full h-full object-cover rounded-full shadow-2xl border-2 border-gray-900"
+            />
           </div>
           
           {/* Introductory Text */}
@@ -234,7 +260,8 @@ const HeroSection = () => (
         </div>
         
         {/* Description and Contact Links */}
-        <p id="about" className="mt-8 text-lg text-gray-700 max-w-xl text-center md:text-left md:mt-10 mx-auto md:mx-0">
+        {/* Removed id="about" from this p-tag as the parent section now holds it */}
+        <p className="mt-8 text-lg text-gray-700 max-w-xl text-center md:text-left md:mt-10 mx-auto md:mx-0">
           An aspiring analyst experienced in working with big healthcare data.
         </p>
         
@@ -264,7 +291,7 @@ const HeroSection = () => (
 
 const SkillCircles = ({ skillsData }) => (
   <section id="skill-circles" className="pt-8 pb-16 md:pb-20">
-    {/* Style block for both Typewriter caret and Wavy Blob animation */}
+    {/* Style block for the Typewriter caret only. Blob animation CSS has been removed. */}
     <style jsx="true">{`
         @keyframes blink {
           0%, 100% { border-color: transparent; }
@@ -273,58 +300,29 @@ const SkillCircles = ({ skillsData }) => (
         .animate-pulse-caret {
           animation: blink 0.7s step-end infinite;
         }
-
-        /* Wavy Blob Animation - Creates the moving organic shape */
-        @keyframes wobble {
-          0%, 100% {
-            clip-path: polygon(50% 0%, 80% 10%, 100% 30%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 30%, 20% 10%);
-          }
-          33% {
-            clip-path: polygon(65% 5%, 95% 25%, 90% 55%, 70% 85%, 40% 95%, 20% 80%, 5% 50%, 15% 20%);
-          }
-          66% {
-            clip-path: polygon(40% 5%, 85% 15%, 85% 40%, 75% 75%, 50% 95%, 15% 70%, 10% 45%, 20% 15%);
-          }
-        }
-
-        /* Wrapper for the "border" effect (background color) */
-        .blob-wrapper {
-            background: linear-gradient(135deg, #10B981, #3B82F6); /* Green and Blue gradient for border */
-            border-radius: 9999px; /* Fallback for older browsers (not used due to clip-path) */
-            padding: 5px; /* Border thickness */
-            transition: transform 0.3s ease-in-out;
-            will-change: transform;
-        }
-
-        /* Image element with the actual animated clip-path */
-        .blob-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            animation: wobble 15s ease-in-out infinite alternate;
-            clip-path: polygon(50% 0%, 80% 10%, 100% 30%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 30%, 20% 10%);
-            display: block;
-        }
     `}</style>
-    <div className="flex flex-wrap justify-center gap-4 md:gap-8 max-w-5xl mx-auto">
+    <div className="flex flex-wrap justify-center gap-6 md:gap-10 max-w-5xl mx-auto">
       {skillsData.map((skill) => (
         <div 
           key={skill.name} 
-          className="group relative flex flex-col items-center"
+          // ** Added group and set layout for vertical stacking **
+          className="flex flex-col items-center group w-20 text-center"
         >
           <div
-            // Size is small: w-10 h-10 sm:w-12 sm:h-12
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white flex items-center justify-center 
-                       border-2 border-gray-200 shadow-md transition-all duration-300 
-                       hover:shadow-lg hover:border-gray-400 group-hover:bg-gray-50 
-                       transform group-hover:scale-110" 
+            // ** Increased size slightly for better visuals (w-14/h-14) **
+            className="w-14 h-14 rounded-full bg-white flex items-center justify-center 
+                       border-2 border-gray-200 shadow-md transition duration-300 group-hover:border-gray-900" 
           >
             {/* The icon() function now returns a Font Awesome <i> tag */}
             {skill.icon()}
           </div>
-          <p className="mt-2 text-xs text-gray-600 font-medium opacity-0 group-hover:opacity-100 transition duration-200 absolute -bottom-4 sm:-bottom-5 whitespace-nowrap">
+          {/* Skill Name (appears on hover) */}
+          <span 
+            className="mt-2 text-xs font-semibold text-gray-800 
+                       opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap"
+          >
             {skill.name}
-          </p>
+          </span>
         </div>
       ))}
     </div>
@@ -459,8 +457,6 @@ const ProjectsSection = ({ data }) => (
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const mapUrl = "https://www.google.com/maps/place/Manhattan,+New+York,+NY/@40.759089,-73.985227,14z/data=!4m6!3m5!1s0x89c2588f046ee661:0xa0b3281fcecc08c!8m2!3d40.7831!4d-73.9712!16zL2m/MDJwbDM?hl=en";
-  const mapImageUrl = "https://placehold.co/400x200/222222/60A5FA?text=+++%0A__+%0A+++%0A__+%0A+++&font=roboto";
 
   return (
     <footer className="bg-gray-900 text-white py-8">
@@ -468,16 +464,20 @@ const Footer = () => {
         
         <p className="text-lg mb-4 font-semibold">Let's Connect.</p>
 
-        <div className="mb-8 flex justify-center">
-          <a href={mapUrl} target="_blank" rel="noopener noreferrer" 
-             className="block rounded-lg overflow-hidden shadow-2xl transition duration-300 hover:scale-[1.02] hover:shadow-white/30 max-w-xs w-full">
-            <img 
-              src={mapImageUrl} 
-              alt="Click to view Manhattan, NY on Google Maps" 
-              className="w-full h-auto object-cover"
-              onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x200/4B5563/FFFFFF?text=View%20Location%20on%20Map` }}
-            />
-          </a>
+        {/* Map Embed Container: Reduced max-width to max-w-md */}
+        <div className="mb-8 flex justify-center mx-auto max-w-md w-full">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96708.35377212727!2d-74.0516318508202!3d40.75903219750165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2588f046ee661%3A0xa0b3281fcecc08c!2sManhattan%2C%20New%20York%2C%20NY!5e0!3m2!1sen!2sus!4v1764724471478!5m2!1sen!2sus" 
+            title="Location in Manhattan, NY"
+            // Reduced height from 320px to 200px
+            width="100%" 
+            height="200" 
+            // Reduced Tailwind height class from h-80 to h-52
+            className="w-full h-52 rounded-xl shadow-2xl transition duration-300 border-4 border-gray-700" 
+            allowFullScreen="" 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
         
         <div className="flex justify-center space-x-6 text-xl">
