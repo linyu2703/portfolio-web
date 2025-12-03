@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 // Re-importing Lucide icons needed for section headers
 import { Menu, X, Mail, Linkedin, Github, FileText, Briefcase, GraduationCap, Code } from 'lucide-react'; 
+import pfp from "../assets/pfp.jpg"
 
 // ===========================================
 // I. DATA DEFINITIONS
@@ -202,7 +203,7 @@ const Header = ({ sections }) => {
         <nav className="flex justify-between items-center py-4">
           {/* Updated link to point to the new #about anchor */}
           <a href="#about" className="text-2xl font-bold text-gray-900 hover:text-gray-600 transition duration-300">
-            Yu Lin
+            YL
           </a>
           <div className="hidden md:flex space-x-8 text-lg font-medium">
             {sections.map(({ id, name }) => (
@@ -241,7 +242,7 @@ const HeroSection = () => (
             id="profile-picture-container"
           >
             <img 
-              src="pfp.jpg" 
+              src={pfp} 
               alt="Yu Lin Profile Photo" 
               // *** Updated for thin black border ***
               className="w-full h-full object-cover rounded-full shadow-2xl border-2 border-gray-900"
